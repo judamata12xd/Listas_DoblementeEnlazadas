@@ -60,4 +60,58 @@ public class metodos {
         }
         return l;
     }
+
+    public Listadoble EliminarInicio(Listadoble l) {
+        if (l.getInicio() == null) {
+            System.out.println("Lista vacia");
+        }
+
+        if (l.getInicio() == l.getFin()) {
+            l.setInicio(null);
+            l.setFin(null);
+        } else {
+            l.setInicio(l.getInicio().getSiguiente());
+            l.getInicio().setAnterior(null);
+        }
+        return l;
+    }
+
+    public void eliminarDato(Listadoble l) {
+
+        if (l.getInicio() == null) {
+            System.out.println("La lista está vacía.");
+            return;
+        }
+
+        System.out.println("Digite el número que desea eliminar:");
+        int numero = sc.nextInt();
+
+        Nodo aux = l.getInicio();
+
+        while (aux != null) {
+
+            if (aux.getDato() == numero) {
+
+                if (aux.getAnterior() != null) {
+                    aux.getAnterior().setSiguiente(aux.getSiguiente());
+                } else {
+                    l.setInicio(aux.getSiguiente());
+                }
+
+                if (aux.getSiguiente() != null) {
+                    aux.getSiguiente().setAnterior(aux.getAnterior());
+                } else {
+                    l.setFin(aux.getAnterior());
+                }
+
+                System.out.println("Dato eliminado correctamente.");
+                return;
+            }
+
+            aux = aux.getSiguiente();
+        }
+
+        System.out.println("El número no se encontró.");
+
+    }
 }
